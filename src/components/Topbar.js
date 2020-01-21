@@ -1,5 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from '../assets/logo.svg';
+import '../styles/Topbar.css';
+
 
 export function Topbar() {
     return (

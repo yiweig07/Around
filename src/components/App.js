@@ -27,7 +27,7 @@ class App extends React.Component {
         return (
             <div className="App">
                 <Topbar isLoggedIn={this.state.isLoggedIn} handleLogout={this.handleLogout} />
-                <Main isLoggedIn={this.state.isLoggedIn} handleLogin={this.handleLogin.bind} />
+                <Main isLoggedIn={this.state.isLoggedIn} handleLogin={this.handleLogin} />
             </div>
         );
     }

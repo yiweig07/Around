@@ -1,5 +1,6 @@
 import React from "react";
 import '../styles/Register.css';
+import { Link } from "react-router-dom";
 import {
     Form,
     Input,
@@ -111,6 +112,9 @@ class RegistrationForm extends React.Component {
                     <Button type="primary" htmlType="submit">
                         Register
                     </Button>
+                    <div>
+                        I already have an account, go back to <Link to={"/login"}>login</Link>
+                    </div>
                 </Form.Item>
             </Form>
         );

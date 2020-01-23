@@ -19,6 +19,3 @@ export function Topbar(props) {
         </header>
     );
 }
-
-
-

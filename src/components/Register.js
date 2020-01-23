@@ -1,10 +1,11 @@
 import React from "react";
 import '../styles/Register.css';
 import { Link } from "react-router-dom";
+import { API_ROOT } from "../constants";
 import {
     Form,
     Input,
-    Button,
+    Button, message,
 } from 'antd';
 
 class RegistrationForm extends React.Component {
@@ -15,9 +16,30 @@ class RegistrationForm extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
+        let lastResponse;
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+                fetch(`${API_ROOT}/signup`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        username: values.username,
+                        password: values.password,
+                    }),
+                }).then((response) => {
+                    lastResponse = response;
+                    return response.text();
+                }, (error) => {
+                    console.log('Error');
+                }).then((text) => {
+                    if (lastResponse.ok) {
+                        message.success(text);
+                        this.props.history.push('/login');
+
+                    } else {
+                        message.error(text);
+                    }
+                })
             }
         });
     };

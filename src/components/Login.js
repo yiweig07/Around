@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/Login.css';
+import { Link } from "react-router-dom"
 import { Form, Icon, Input, Button } from 'antd';
 
 class NormalLoginForm extends React.Component {
@@ -42,7 +43,7 @@ class NormalLoginForm extends React.Component {
                         Log in
                     </Button>
                     <div>
-                        Or <a href="">register now!</a>
+                        Or <Link to="/register">register now!</Link>
                     </div>
                 </Form.Item>
             </Form>

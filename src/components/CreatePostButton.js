@@ -1,11 +1,10 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
-
+import { CreatePostForm} from "./CreatePostForm";
 
 
 export class CreatePostButton extends React.Component {
     state = {
-        ModalText: 'Content of the modal',
         visible: false,
         confirmLoading: false,
     };
@@ -18,15 +17,24 @@ export class CreatePostButton extends React.Component {
 
     handleOk = () => {
         this.setState({
-            ModalText: 'The modal will be closed after two seconds',
             confirmLoading: true,
         });
-        setTimeout(() => {
-            this.setState({
-                visible: false,
-                confirmLoading: false,
-            });
-        }, 2000);
+        this.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+
+                setTimeout(() => {
+                    this.setState({
+                        visible: false,
+                        confirmLoading: false,
+                    });
+                }, 2000);
+            } else {
+                this.setState({
+                    confirmLoading: false,
+                });
+            }
+        });
     };
 
     handleCancel = () => {
@@ -36,8 +44,12 @@ export class CreatePostButton extends React.Component {
         });
     };
 
+    saveFormRef = (formInstance) => {
+        this.form = formInstance;
+    }
+
     render() {
-        const { visible, confirmLoading, ModalText } = this.state;
+        const { visible, confirmLoading } = this.state;
         return (
             <div>
                 <Button type="primary" onClick={this.showModal}>
@@ -51,7 +63,7 @@ export class CreatePostButton extends React.Component {
                     confirmLoading={confirmLoading}
                     onCancel={this.handleCancel}
                 >
-                    <p>{ModalText}</p>
+                    <CreatePostForm ref={this.saveFormRef} />
                 </Modal>
             </div>
         );

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Modal, Button } from 'antd';
+import { Modal, Button, message } from 'antd';
 import { CreatePostForm} from "./CreatePostForm";
+import {API_ROOT, POSITION_KEY, TOKEN_KEY, AUTH_HEADER, POSITION_NOISE} from '../constants';
 
 
 export class CreatePostButton extends React.Component {
@@ -22,13 +23,35 @@ export class CreatePostButton extends React.Component {
         this.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-
-                setTimeout(() => {
-                    this.setState({
-                        visible: false,
-                        confirmLoading: false,
-                    });
-                }, 2000);
+                const position = JSON.parse(localStorage.getItem(POSITION_KEY));
+                const token = localStorage.getItem(TOKEN_KEY);
+                const formData = new FormData();
+                formData.append('lat', position.latitude + Math.random() * POSITION_NOISE * 2 - POSITION_NOISE);
+                formData.append('lon', position.longitude + Math.random() * POSITION_NOISE * 2 - POSITION_NOISE);
+                formData.append('message', values.message);
+                formData.append('image', values.image[0].originFileObj);
+                fetch(`${API_ROOT}/post`, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        Authorization: `${AUTH_HEADER} ${token}`,
+                    },
+                    dataType: 'text',
+                }).then((response) => {
+                    if (response.ok) {
+                        message.success('Create post succeed!');
+                        this.form.resetFields();
+                        this.setState({
+                            visible: false,
+                            confirmLoading: false,
+                        });
+                    } else {
+                        message.error('Create post failed.');
+                        this.setState({
+                            confirmLoading: false,
+                        });
+                    }
+                })
             } else {
                 this.setState({
                     confirmLoading: false,

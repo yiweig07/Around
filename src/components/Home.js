@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/Home.css"
 import{ Gallery } from './Gallery';
 import { Tabs, Button, Spin } from 'antd';
+import { CreatePostButton } from './CreatePostButton';
 import {API_ROOT, GEOLOCATION_OPTIONS, POSITION_KEY, TOKEN_KEY, AUTH_HEADER} from '../constants';
 
 const { TabPane } = Tabs;
@@ -124,7 +125,7 @@ export class Home extends React.Component {
 
 
     render() {
-        const operations = <Button>Create New Post</Button>;
+        const operations = <CreatePostButton />;
         return (
             <Tabs tabBarExtraContent={operations} className="main-tabs">
                 <TabPane tab="Image Posts" key="1">

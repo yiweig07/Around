@@ -3,6 +3,7 @@ import "../styles/Home.css"
 import{ Gallery } from './Gallery';
 import { Tabs, Spin, Row, Col } from 'antd';
 import { CreatePostButton } from './CreatePostButton';
+import { AroundMap } from './AroundMap';
 import {API_ROOT, GEOLOCATION_OPTIONS, POSITION_KEY,
     TOKEN_KEY, AUTH_HEADER, POST_TYPE_IMAGE, POST_TYPE_VIDEO,} from '../constants';
 
@@ -164,8 +165,13 @@ export class Home extends React.Component {
                 <TabPane tab="Video Posts" key="2">
                     {this.getPosts(POST_TYPE_VIDEO)}
                 </TabPane>
-                <TabPane tab="Tab 3" key="3">
-                    Content of tab 3
+                <TabPane tab="Map" key="3">
+                    <AroundMap
+                        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3CEh9DXuyjozqptVB5LA-dN7MxWWkr9s&v=3.exp&libraries=geometry,drawing,places"
+                        loadingElement={<div style={{ height: `100%` }} />}
+                        containerElement={<div style={{ height: `600px` }} />}
+                        mapElement={<div style={{ height: `100%` }} />}
+                    />
                 </TabPane>
             </Tabs>
         );

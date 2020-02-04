@@ -12,7 +12,7 @@ export class Gallery extends React.Component {
                 thumbnail: PropTypes.string.isRequired,
                 caption: PropTypes.string.isRequired,
                 thumbnailHeight:PropTypes.number.isRequired,
-                thumbnailWeight:PropTypes.number.isRequired,
+                thumbnailWidth:PropTypes.number.isRequired,
             })
         ).isRequired
     }

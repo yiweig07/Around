@@ -18,7 +18,7 @@ export class Home extends React.Component {
     };
 
 
-    getGeolocation() {
+    getGeolocation = () => {
         this.setState({
             loadingGeolocation: true,
             errorMessage: null,
@@ -115,7 +115,7 @@ export class Home extends React.Component {
         }
     }
 
-    getImagePosts() {
+    getImagePosts = () => {
         const images = this.state.posts
             .filter((post) => post.type === POST_TYPE_IMAGE)
             .map((post) => {
@@ -131,7 +131,7 @@ export class Home extends React.Component {
             return (<Gallery images={images}/>);
     }
 
-    getVideoPosts() {
+    getVideoPosts = () => {
         return (
             <Row gutter={32}>
                 {
@@ -172,6 +172,7 @@ export class Home extends React.Component {
                         containerElement={<div style={{ height: `600px` }} />}
                         mapElement={<div style={{ height: `100%` }} />}
                         posts = {this.state.posts}
+                        onChange={this.loadNearbyPost}
                     />
                 </TabPane>
             </Tabs>

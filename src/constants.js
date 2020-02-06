@@ -11,3 +11,5 @@ export const GEOLOCATION_OPTIONS = {
 };
 export const POST_TYPE_IMAGE = 'image';
 export const POST_TYPE_VIDEO = 'video';
+export const TOPIC_FACE = 'face';
+export const TOPIC_AROUND = 'around';
